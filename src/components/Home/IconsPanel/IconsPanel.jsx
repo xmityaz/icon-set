@@ -1,20 +1,31 @@
-/**
- * Created by xmityaz on 16.10.16.
- */
+// @flow
 
-import React, { PropTypes } from 'react';
-import iconsMap from '../../Icons/iconsMap'
+import React  from 'react';
+import allIcons from '../../Icons/icons'
 import IconContainer from '../IconContaiener/IconContainer';
 import theme from './IconsPanel.css';
 
-function IconsPanel() {
+function isIconApplied(icon:Object, text:string) {
+  const { name, tags } = icon;
+  return ~name.indexOf(text) || tags.find(tag => ~tag.indexOf(text));
+}
+
+
+function IconsPanel({searchText, icons}: { searchText: string, icons: Array<Object> }) {
   return (
     <div className={theme.root}>
-      {iconsMap.map(item => (
-        <IconContainer icon={item.icon} {...item} key={item.name} />
-      ))}
+      {
+        icons
+          .filter(icon => isIconApplied(icon, searchText))
+          .map(item => (
+            <IconContainer icon={item.icon} {...item} key={item.name}/>
+          ))
+      }
     </div>
   );
 }
 
-export default IconsPanel ;
+IconsPanel.defaultProps = {
+  icons: allIcons,
+};
+export default IconsPanel;

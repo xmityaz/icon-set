@@ -2,7 +2,7 @@ import React from 'react';
 import IconAlert from './IconAlert.jsx';
 import IconPerson from './IconPerson.jsx';
 
-const iconsMap = [
+const icons = [
   {
     name: 'alert',
     tags: ['alert', 'warning', 'triangle'],
@@ -15,4 +15,4 @@ const iconsMap = [
   }
 ];
 
-export default iconsMap;
+export default icons;
